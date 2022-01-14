@@ -1,0 +1,27 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "Notes App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmanSaeed331/Notes-App.git"
+  },
+  "author": "Eman Saeed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmanSaeed331/Notes-App/issues"
+  },
+  "homepage": "https://github.com/EmanSaeed331/Notes-App#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "memorystorage": "^0.12.0",
+    "sequential-ids": "^0.0.0"
+  }
+}
