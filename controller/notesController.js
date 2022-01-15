@@ -71,8 +71,23 @@ exports.updateNotes = function(req,res){
     );
     memStorage.store.setItem(noteId,noteObj);
 
-    res.status(200).send("Successfully saved");
+    return res.status(200).send("Upadated  Successfully");
 }
 exports.deleteNote = function(req,res){
-    res.send("delete note .........");
+   var noteId =  req.params.noteId;
+   // validate not empty
+   if(!noteId){
+       return res.status(500).send({error:'cannot delete empty note'});
+   }
+   //validate is already exist
+   var noteItem =  memStorage.store.getItem(noteId);
+   if (!noteItem ){
+       return res.status(500).send({error:'note id does not exist'});
+
+   }
+   // note is exists 
+   memStorage.store.removeItem(noteId); 
+   return res.status(200).send("deleted  Successfully");
+
+   
 }
