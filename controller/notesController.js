@@ -18,7 +18,28 @@ exports.getAllNotes = function(req,res){
     res.send("All Notes send ........."+JSON.stringify(noteObj));
 }
 exports.saveNotes = function(req,res){
-    res.send("Save note  .........");
+    var seqId = generator.generate();
+    var createdBy = "Admin";
+    var createdOn = new Date();
+    var title = req.body.title;
+    var content = req.body.content;
+    if (!title || !content){
+        return res.status(500).send({error:'Title & content must not be empty'});
+    }
+    var Note =  model.Note;
+    var noteObj = new Note(
+        seqId,
+        title,
+        content,
+        createdBy,
+        createdOn
+    );
+    memStorage.store.setItem(seqId,noteObj);
+
+    res.status(201).send("Successfully saved");
+
+
+
 }
 exports.updateNotes = function(req,res){
     res.send("update note .........");
