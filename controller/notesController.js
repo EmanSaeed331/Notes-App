@@ -43,7 +43,29 @@ exports.saveNotes = function(req,res){
 
 }
 exports.updateNotes = function(req,res){
-    res.send("update note .........");
+    var seqId = generator.generate();
+    var createdBy = "Admin";
+    var createdOn = new Date();
+    var noteId = req.body.noteId;
+    var title = req.body.title;
+    var content = req.body.content;
+    if (!noteId){
+        return res.status(500).send({error:'Note ID must not be null'});
+    }
+    if (!title || !content){
+        return res.status(500).send({error:'Title & content must not be empty'});
+    }
+    var Note =  model.Note;
+    var noteObj = new Note(
+        noteId,
+        title,
+        content,
+        createdBy,
+        createdOn
+    );
+    memStorage.store.setItem(noteId,noteObj);
+
+    res.status(200).send("Successfully saved");
 }
 exports.deleteNote = function(req,res){
     res.send("delete note .........");
