@@ -55,6 +55,12 @@ exports.updateNotes = function(req,res){
     if (!title || !content){
         return res.status(500).send({error:'Title & content must not be empty'});
     }
+    //Validatoin for noteId value
+    var noteItem =  memStorage.store.getItem(noteId);
+    if (!noteItem ){
+        return res.status(500).send({error:'note id does not exist'});
+
+    } 
     var Note =  model.Note;
     var noteObj = new Note(
         noteId,
